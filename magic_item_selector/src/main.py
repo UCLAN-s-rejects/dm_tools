@@ -21,10 +21,10 @@ app = Flask(__name__)
 @app.route('/test', methods = ['POST'])
 def randomiser():
     if "weightings" in request.json:
-        l=request.json["weightings"][0]
-        m=request.json["weightings"][1]
-        h=request.json["weightings"][2]
-        vh=request.json["weightings"][3]
+        l=int(request.json["weightings"]["low"])
+        m=int(request.json["weightings"]["med"])
+        h=int(request.json["weightings"]["high"])
+        vh=int(request.json["weightings"]["vhigh"])
         data=load_data_arrays(low_val,med_val,high_val,vhigh_val)
         total=(l+m+h+vh)
         tier=random.randint(1,total+1)
@@ -62,4 +62,4 @@ def randomiser():
         return "include wieghtings"
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=3000)
+    app.run(debug=True,host='0.0.0.0',port=6000)
